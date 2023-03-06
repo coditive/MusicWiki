@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.musicwiki.genre.GenreDetailScreen
+import com.example.musicwiki.album.AlbumDetailScreen
 import com.example.musicwiki.ui.theme.MusicWikiTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    GenreDetailScreen()
+                    AlbumDetailScreen()
                 }
             }
         }
