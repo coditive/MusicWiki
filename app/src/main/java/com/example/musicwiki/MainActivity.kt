@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.musicwiki.genre.GenreDetailScreen
 import com.example.musicwiki.ui.theme.MusicWikiTheme
@@ -17,10 +17,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             MusicWikiTheme {
                 // A surface container using the 'background' color from the theme
-                Scaffold(
+                Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    GenreDetailScreen(paddingValues = it)
+                    GenreDetailScreen()
                 }
             }
         }
