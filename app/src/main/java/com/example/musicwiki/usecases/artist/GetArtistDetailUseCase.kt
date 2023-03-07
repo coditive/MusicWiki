@@ -1,4 +1,4 @@
-package com.example.musicwiki.usecases
+package com.example.musicwiki.usecases.artist
 
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
@@ -9,24 +9,26 @@ import kotlinx.coroutines.flow.StateFlow
 
 class GetArtistDetailUseCase(private val apiService: ApiService) {
 
-    private val _artistDetailFlow = MutableStateFlow(ArtistDetailUI())
-    val artistDetailFlow: StateFlow<ArtistDetailUI> = _artistDetailFlow
+    private val _artistDetailFlow = MutableStateFlow(ArtistDetailModel())
+    val artistDetailFlow: StateFlow<ArtistDetailModel> = _artistDetailFlow
 
     suspend fun execute(artist: Artist) {
         try {
             val response = apiService.getArtistInfoByName(artist.name, BuildConfig.API_KEY)
-            _artistDetailFlow.emit(ArtistDetailUI(response.name, response.bio, response.stats.playcount, response.stats.listeners))
+            _artistDetailFlow.emit(ArtistDetailModel(response.name, response.bio, response.stats.playcount, response.stats.listeners))
         } catch (e: Exception) {
-            _artistDetailFlow.emit(ArtistDetailUI(exception = e))
+            _artistDetailFlow.emit(ArtistDetailModel(exception = e.localizedMessage))
         }
     }
 }
 
 
-data class ArtistDetailUI(
+data class ArtistDetailModel(
     val name: String? = null,
     val bio: ArtistBio? = null,
     val playCount: Long? = null,
     val followers: Long? = null,
-    val exception: Exception? = null
-)
+    val exception: String? = null
+) {
+    fun isNotNull() = name != null && bio != null && playCount != null && followers != null
+}

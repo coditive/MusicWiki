@@ -16,8 +16,8 @@ import com.example.musicwiki.album.AlbumDetailScreen
 import com.example.musicwiki.artist.ArtistDetailScreen
 import com.example.musicwiki.genre.GenreDetailScreen
 import com.example.musicwiki.home.WelcomeScreen
+import com.example.musicwiki.ui.screens.welcome.WelcomeViewModel
 import com.example.musicwiki.ui.theme.MusicWikiTheme
-import com.example.musicwiki.viewmodel.WelcomeViewModel
 
 class MainActivity : ComponentActivity() {
 

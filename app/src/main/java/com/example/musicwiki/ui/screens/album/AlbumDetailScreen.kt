@@ -1,4 +1,4 @@
-package com.example.musicwiki.artist
+package com.example.musicwiki.album
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -20,18 +20,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.musicwiki.viewmodel.WelcomeViewModel
 import com.example.musicwiki.R
+import com.example.musicwiki.ui.screens.welcome.WelcomeViewModel
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ArtistDetailScreen(
-    modifier: Modifier = Modifier,
-    onNavigation: () -> Unit,
-    viewModel: WelcomeViewModel
-) {
+fun AlbumDetailScreen(modifier: Modifier = Modifier, onNavigationToAlbumDetails: () -> Unit, viewModel: WelcomeViewModel) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (topAppBar, chipRow, albumDescription, artistName, topTracksTitle, topTracksCarousel, topAlbumsTitle, topAlbumsCarousel) = createRefs()
+        val (topAppBar, chipRow, albumDescription, artistName) = createRefs()
 
         Box(
             modifier = modifier
@@ -50,10 +47,9 @@ fun ArtistDetailScreen(
                 contentScale = ContentScale.FillBounds
             )
 
-            TopAppBar(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
+            TopAppBar(modifier = modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
                 title = {},
                 navigationIcon = {
                     Image(
@@ -67,7 +63,7 @@ fun ArtistDetailScreen(
         }
 
         Text(text = "ColdPlay", fontSize = 34.sp, modifier = modifier.constrainAs(artistName) {
-            bottom.linkTo(topAppBar.bottom, 150.dp)
+            bottom.linkTo(topAppBar.bottom, 100.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)
         })
@@ -87,29 +83,14 @@ fun ArtistDetailScreen(
             }
         }
 
-        Text(text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et semper sapien, et dictum ligula. Donec fringilla eros non lorem accumsan, non dictum leo tempor. Suspendisse lobortis eu nibh nec faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam nunc purus, pellentesque ac nunc sed, efficitur tempus est. Fusce dictum at diam eget volutpat. In eleifend est at molestie dictum. Aliquam pharetra, eros ut vestibulum iaculis, sem lacus auctor ex, sit amet ullamcorper mi mi vitae metus. Vivamus ac tellus fermentum, volutpat quam vehicula, vulputate ligula. Vestibulum et pulvinar nibh, ut congue enim. ",
-            modifier = modifier
+        Text(text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et semper sapien, et dictum ligula. Donec fringilla eros non lorem accumsan, non dictum leo tempor. Suspendisse lobortis eu nibh nec faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam nunc purus, pellentesque ac nunc sed, efficitur tempus est. Fusce dictum at diam eget volutpat. In eleifend est at molestie dictum. Aliquam pharetra, eros ut vestibulum iaculis, sem lacus auctor ex, sit amet ullamcorper mi mi vitae metus. Vivamus ac tellus fermentum, volutpat quam vehicula, vulputate ligula. Vestibulum et pulvinar nibh, ut congue enim. "
+        , modifier = modifier
                 .constrainAs(albumDescription) {
                     top.linkTo(chipRow.bottom, 20.dp)
                 }
                 .padding(start = 10.dp, end = 10.dp))
 
-        Text(text = "Top Tracks", modifier = modifier.constrainAs(topTracksTitle) {
-            top.linkTo(albumDescription.bottom, 10.dp)
-        })
-
-
-//        ImageCarousel(modifier = modifier.constrainAs(topTracksCarousel) {
-//            top.linkTo(topTracksTitle.bottom)
-//        })
-
-        Text(text = "Top Albums", modifier = modifier.constrainAs(topAlbumsTitle) {
-            top.linkTo(topTracksCarousel.bottom, 10.dp)
-        })
-//
-//        ImageCarousel(modifier = modifier.constrainAs(topAlbumsCarousel) {
-//            top.linkTo(topAlbumsTitle.bottom)
-//        })
 
     }
+
 }

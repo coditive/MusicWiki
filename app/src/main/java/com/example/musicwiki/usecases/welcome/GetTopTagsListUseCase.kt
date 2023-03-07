@@ -1,28 +1,31 @@
-package com.example.musicwiki.usecases
+package com.example.musicwiki.usecases.welcome
 
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
 import com.example.musicwiki.data.remote.model.tags.Tag
+import com.example.musicwiki.ui.screens.welcome.WelcomeUI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class GetTopTagsListUseCase(private val apiService: ApiService) {
 
-    private val _tagListFlow = MutableStateFlow(TagListUI())
-    val tagListFlow: StateFlow<TagListUI> = _tagListFlow
+    private val _tagListFlow = MutableStateFlow(TagListModel())
+    val tagListFlow: StateFlow<TagListModel> = _tagListFlow
 
     suspend fun execute() {
         try {
             val response = apiService.getTopTagListFromChart(BuildConfig.API_KEY)
-            _tagListFlow.emit(TagListUI(tagList = response.tags.tag))
+            _tagListFlow.emit(TagListModel(tagList = response.tags.tag))
         } catch (e: Exception) {
-            _tagListFlow.emit(TagListUI(exception = e))
+            _tagListFlow.emit(TagListModel(exception = e.localizedMessage))
         }
     }
 }
 
 
-data class TagListUI(
+data class TagListModel(
     val tagList: List<Tag>? = null,
-    val exception: Exception? = null
-)
+    val exception: String? = null
+) {
+    fun toWelcomeUI(): WelcomeUI = WelcomeUI(tagList!!)
+}
