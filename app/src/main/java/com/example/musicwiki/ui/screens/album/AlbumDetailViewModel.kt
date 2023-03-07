@@ -5,14 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.musicwiki.data.remote.model.album.Album
 import com.example.musicwiki.ui.model.UIState
 import com.example.musicwiki.usecases.album.GetAlbumDetailUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AlbumDetailViewModel(
+
+@HiltViewModel
+class AlbumDetailViewModel @Inject constructor(
     private val getAlbumDetailUseCase: GetAlbumDetailUseCase
 ): ViewModel() {
 

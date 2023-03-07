@@ -8,14 +8,18 @@ import com.example.musicwiki.usecases.genre.GetAlbumListForGenreUseCase
 import com.example.musicwiki.usecases.genre.GetArtistListForGenreUseCase
 import com.example.musicwiki.usecases.genre.GetGenreDetailUseCase
 import com.example.musicwiki.usecases.genre.GetTracksListForGenreUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GenreDetailViewModel(
+
+@HiltViewModel
+class GenreDetailViewModel @Inject constructor(
     private val getGenreDetailUseCase: GetGenreDetailUseCase,
     private val getArtistListForGenreUseCase: GetArtistListForGenreUseCase,
     private val getAlbumListForGenreUseCase: GetAlbumListForGenreUseCase,

@@ -8,8 +8,9 @@ import com.example.musicwiki.data.remote.model.wiki.Wiki
 import com.example.musicwiki.ui.screens.album.AlbumDetailsUI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class GetAlbumDetailUseCase(private val apiService: ApiService) {
+class GetAlbumDetailUseCase @Inject constructor(private val apiService: ApiService) {
 
     private val _albumDetailsFlow = MutableStateFlow(AlbumDetails())
     val albumDetailFlow: StateFlow<AlbumDetails> = _albumDetailsFlow

@@ -5,8 +5,9 @@ import com.example.musicwiki.data.remote.ApiService
 import com.example.musicwiki.data.remote.model.tags.Tag
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class GetGenreDetailUseCase(
+class GetGenreDetailUseCase @Inject constructor(
     private val apiService: ApiService
 ) {
 

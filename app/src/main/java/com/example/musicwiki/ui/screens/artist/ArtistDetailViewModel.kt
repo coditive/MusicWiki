@@ -7,14 +7,17 @@ import com.example.musicwiki.ui.model.UIState
 import com.example.musicwiki.usecases.artist.GetArtistDetailUseCase
 import com.example.musicwiki.usecases.artist.GetTopAlbumsOfArtistUseCase
 import com.example.musicwiki.usecases.artist.GetTopTracksOfArtistUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ArtistDetailViewModel(
+@HiltViewModel
+class ArtistDetailViewModel @Inject constructor(
     private val getArtistDetailUseCase: GetArtistDetailUseCase,
     private val getTopAlbumsOfArtistUseCase: GetTopAlbumsOfArtistUseCase,
     private val getTopTracksOfArtistUseCase: GetTopTracksOfArtistUseCase

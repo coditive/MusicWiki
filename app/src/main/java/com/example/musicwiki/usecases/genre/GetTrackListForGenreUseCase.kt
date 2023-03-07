@@ -6,8 +6,9 @@ import com.example.musicwiki.data.remote.model.tags.Tag
 import com.example.musicwiki.data.remote.model.track.Track
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class GetTracksListForGenreUseCase(private val apiService: ApiService) {
+class GetTracksListForGenreUseCase @Inject constructor(private val apiService: ApiService) {
 
     private val _trackListForGenre = MutableStateFlow(TrackListForGenreUI())
     val trackListForGenre: StateFlow<TrackListForGenreUI> = _trackListForGenre

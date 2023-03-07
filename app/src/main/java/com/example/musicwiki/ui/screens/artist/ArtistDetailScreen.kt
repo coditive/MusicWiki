@@ -20,16 +20,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.musicwiki.R
-import com.example.musicwiki.ui.screens.welcome.WelcomeViewModel
+import com.example.musicwiki.ui.screens.artist.ArtistDetailViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArtistDetailScreen(
     modifier: Modifier = Modifier,
     onNavigation: () -> Unit,
-    viewModel: WelcomeViewModel
 ) {
+
+    val viewModel = hiltViewModel<ArtistDetailViewModel>()
+
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
         val (topAppBar, chipRow, albumDescription, artistName, topTracksTitle, topTracksCarousel, topAlbumsTitle, topAlbumsCarousel) = createRefs()
 

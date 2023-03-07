@@ -30,12 +30,12 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "implementation_KEY", "\"ceab544917eee1bdcfa9685adb9adc02\""
+            buildConfigField "String", "API_KEY", "\"ceab544917eee1bdcfa9685adb9adc02\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "implementation_KEY", "\"ceab544917eee1bdcfa9685adb9adc02\""
+            buildConfigField "String", "API_KEY", "\"ceab544917eee1bdcfa9685adb9adc02\""
         }
     }
     compileOptions {
@@ -101,7 +101,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-navigation-animation:0.29.1-alpha"
     implementation "com.google.accompanist:accompanist-pager:0.29.1-alpha"
     implementation "com.google.accompanist:accompanist-placeholder-material:0.29.1-alpha"
-
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
 
     // Moshi
     implementation("com.squareup.moshi:moshi:1.14.0")

@@ -4,14 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.musicwiki.ui.model.UIState
 import com.example.musicwiki.usecases.welcome.GetTopTagsListUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WelcomeViewModel(
+@HiltViewModel
+class WelcomeViewModel @Inject constructor(
     private val getTopTagsListUseCase: GetTopTagsListUseCase
 ): ViewModel() {
 

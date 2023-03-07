@@ -4,10 +4,12 @@ import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
 import com.example.musicwiki.data.remote.model.artist.Artist
 import com.example.musicwiki.data.remote.model.track.Track
+import dagger.multibindings.IntKey
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class GetTopTracksOfArtistUseCase(private val apiService: ApiService) {
+class GetTopTracksOfArtistUseCase @Inject constructor(private val apiService: ApiService) {
 
     private val _trackListForArtist = MutableStateFlow(TrackListForArtistUI())
     val trackListForArtist: StateFlow<TrackListForArtistUI> = _trackListForArtist

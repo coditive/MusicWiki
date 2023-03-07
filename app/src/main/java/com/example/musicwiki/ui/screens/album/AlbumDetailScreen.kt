@@ -1,4 +1,4 @@
-package com.example.musicwiki.album
+package com.example.musicwiki.ui.screens.album
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -20,13 +20,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.musicwiki.R
-import com.example.musicwiki.ui.screens.welcome.WelcomeViewModel
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AlbumDetailScreen(modifier: Modifier = Modifier, onNavigationToAlbumDetails: () -> Unit, viewModel: WelcomeViewModel) {
+fun AlbumDetailScreen(
+    modifier: Modifier = Modifier,
+    onNavigationToAlbumDetails: () -> Unit,
+) {
+
+    val viewModel = hiltViewModel<AlbumDetailViewModel>()
+
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
         val (topAppBar, chipRow, albumDescription, artistName) = createRefs()
 

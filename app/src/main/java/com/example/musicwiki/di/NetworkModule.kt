@@ -1,13 +1,10 @@
 package com.example.musicwiki.di
 
-import android.content.Context
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -35,7 +32,6 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideApiRequest(
-        @ApplicationContext context: Context,
         okHttpClient: OkHttpClient
     ): ApiService = Retrofit.Builder()
         .baseUrl("http://ws.audioscrobbler.com/")
