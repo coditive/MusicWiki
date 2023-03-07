@@ -27,11 +27,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.musicwiki.viewmodel.WelcomeViewModel
 import com.example.musicwiki.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GenreDetailScreen(modifier: Modifier = Modifier) {
+fun GenreDetailScreen(
+    modifier: Modifier = Modifier,
+    onNavigationToAlbumDetails: () -> Unit,
+    onNavigationToArtistDetails: () -> Unit,
+    viewModel: WelcomeViewModel
+) {
     Scaffold(
         topBar = {
             TopAppBar(
