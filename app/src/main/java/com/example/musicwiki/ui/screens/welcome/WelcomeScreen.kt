@@ -1,5 +1,6 @@
-package com.example.musicwiki.home
+package com.example.musicwiki.ui.screens.welcome
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,13 +12,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.grid.GridCells.Fixed
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Chip
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -26,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.musicwiki.R
-import com.example.musicwiki.ui.screens.welcome.WelcomeViewModel
+import com.example.musicwiki.ui.model.UIState
+import timber.log.Timber
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -35,12 +39,15 @@ fun WelcomeScreen(
     modifier: Modifier = Modifier,
     onNavigation: () -> Unit,
 ) {
+    Log.d("welcome", "Welcome screen reached!!")
     val viewModel = hiltViewModel<WelcomeViewModel>()
+    val uiState by viewModel.welcomeUIState.collectAsState()
+    Timber.d("Viewmodel created!!!!!")
+    viewModel.getTopTagList()
 
     Column(
         modifier = modifier
             .fillMaxSize()
-
     ) {
         Spacer(modifier = modifier.size(60.dp))
         Text(
@@ -79,31 +86,30 @@ fun WelcomeScreen(
                     })
         }
 
-        val chipValues = listOf(
-            "Chip 1",
-            "Chip 2",
-            "Chip 3",
-            "Chip 4",
-            "Chip 5",
-            "Chip 6",
-            "Chip 7",
-            "Chip 8",
-            "Chip 9"
-        )
-
-        LazyVerticalGrid(
-            columns = Fixed(3),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            items(chipValues.size) { item ->
-                Card(
-                    modifier = Modifier.padding(8.dp)
+        when(val state = uiState) {
+            is UIState.Error -> {
+                Timber.e(state.message)
+            }
+            UIState.Loading -> {
+                Timber.e("Loading")
+            }
+            is UIState.Success -> {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Chip(onClick = {  }) {
-                        Text(text = chipValues[item])
+                    items(state.data.tagList.size) { item ->
+                        Card(
+                            modifier = Modifier.padding(8.dp)
+                        ) {
+                            Chip(onClick = {  }) {
+                                Text(text = state.data.tagList[item].name)
+                            }
+                        }
                     }
                 }
             }
         }
+
     }
 }

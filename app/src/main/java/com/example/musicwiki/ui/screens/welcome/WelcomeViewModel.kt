@@ -1,5 +1,6 @@
 package com.example.musicwiki.ui.screens.welcome
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.musicwiki.ui.model.UIState
@@ -29,6 +30,7 @@ class WelcomeViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.Lazily, UIState.Loading)
 
     fun getTopTagList() {
+        Log.e("welcome","GetTopTagList Called!!")
         viewModelScope.launch(Dispatchers.IO) {
             getTopTagsListUseCase.execute()
         }

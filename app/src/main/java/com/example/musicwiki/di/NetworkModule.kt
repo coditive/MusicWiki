@@ -2,6 +2,8 @@ package com.example.musicwiki.di
 
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +23,7 @@ object NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val okHttpClient = OkHttpClient.Builder()
+        okHttpClient.addInterceptor(HttpLoggingInterceptor())
         if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -29,14 +32,21 @@ object NetworkModule {
         return okHttpClient.build()
     }
 
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
     @Singleton
     @Provides
     fun provideApiRequest(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
     ): ApiService = Retrofit.Builder()
-        .baseUrl("http://ws.audioscrobbler.com/")
+        .baseUrl("https://ws.audioscrobbler.com/")
         .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create().asLenient())
+        .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
         .build()
         .create(ApiService::class.java)
 

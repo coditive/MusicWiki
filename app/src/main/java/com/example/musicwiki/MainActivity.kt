@@ -13,10 +13,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.musicwiki.artist.ArtistDetailScreen
 import com.example.musicwiki.genre.GenreDetailScreen
-import com.example.musicwiki.home.WelcomeScreen
 import com.example.musicwiki.ui.screens.album.AlbumDetailScreen
+import com.example.musicwiki.ui.screens.welcome.WelcomeScreen
 import com.example.musicwiki.ui.theme.MusicWikiTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

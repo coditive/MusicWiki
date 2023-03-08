@@ -1,5 +1,6 @@
 package com.example.musicwiki.usecases.welcome
 
+import android.util.Log
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
 import com.example.musicwiki.data.remote.model.tags.Tag
@@ -14,10 +15,12 @@ class GetTopTagsListUseCase @Inject constructor(private val apiService: ApiServi
     val tagListFlow: StateFlow<TagListModel> = _tagListFlow
 
     suspend fun execute() {
+        Log.e("welcome","execute Called!!")
         try {
             val response = apiService.getTopTagListFromChart(BuildConfig.API_KEY)
             _tagListFlow.emit(TagListModel(tagList = response.tags.tag))
         } catch (e: Exception) {
+            Log.e("welcome",e.message!!)
             _tagListFlow.emit(TagListModel(exception = e.localizedMessage))
         }
     }
