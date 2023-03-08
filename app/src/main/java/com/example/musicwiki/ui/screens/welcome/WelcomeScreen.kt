@@ -1,6 +1,5 @@
 package com.example.musicwiki.ui.screens.welcome
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,10 +38,8 @@ fun WelcomeScreen(
     modifier: Modifier = Modifier,
     onNavigation: () -> Unit,
 ) {
-    Log.d("welcome", "Welcome screen reached!!")
     val viewModel = hiltViewModel<WelcomeViewModel>()
     val uiState by viewModel.welcomeUIState.collectAsState()
-    Timber.d("Viewmodel created!!!!!")
     viewModel.getTopTagList()
 
     Column(
@@ -82,17 +79,21 @@ fun WelcomeScreen(
                 modifier = modifier
                     .padding(start = 8.dp)
                     .clickable {
-
+                        viewModel.expandTagList()
                     })
         }
 
-        when(val state = uiState) {
+        Spacer(modifier = modifier.size(10.dp))
+
+        when (val state = uiState) {
             is UIState.Error -> {
                 Timber.e(state.message)
             }
+
             UIState.Loading -> {
-                Timber.e("Loading")
+
             }
+
             is UIState.Success -> {
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(3),
@@ -102,7 +103,7 @@ fun WelcomeScreen(
                         Card(
                             modifier = Modifier.padding(8.dp)
                         ) {
-                            Chip(onClick = {  }) {
+                            Chip(onClick = { onNavigation.invoke() }) {
                                 Text(text = state.data.tagList[item].name)
                             }
                         }
