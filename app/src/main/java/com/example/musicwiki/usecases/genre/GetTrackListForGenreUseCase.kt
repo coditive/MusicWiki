@@ -2,7 +2,6 @@ package com.example.musicwiki.usecases.genre
 
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
-import com.example.musicwiki.data.remote.model.tags.Tag
 import com.example.musicwiki.data.remote.model.track.Track
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,9 +12,9 @@ class GetTracksListForGenreUseCase @Inject constructor(private val apiService: A
     private val _trackListForGenre = MutableStateFlow(TrackListForGenreUI())
     val trackListForGenre: StateFlow<TrackListForGenreUI> = _trackListForGenre
 
-    suspend fun execute(tag: Tag) {
+    suspend fun execute(tag: String) {
         try {
-            val response = apiService.getTrackListFromTag(tag.name, BuildConfig.API_KEY)
+            val response = apiService.getTrackListFromTag(tag, BuildConfig.API_KEY)
             _trackListForGenre.emit(TrackListForGenreUI(response.tracks.track))
         } catch (e: Exception) {
             _trackListForGenre.emit(TrackListForGenreUI(exception = e.localizedMessage))

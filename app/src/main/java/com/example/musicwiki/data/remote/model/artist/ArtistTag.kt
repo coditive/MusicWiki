@@ -1,7 +1,9 @@
 package com.example.musicwiki.data.remote.model.artist
 
-data class ArtistTag (
-    val count: Int,
-    val name: String,
-    val url: String
-    )
+import com.squareup.moshi.Json
+
+data class ArtistTag(
+    @Json(name = "count") val count: Int,
+    @Json(name = "name") val name: String,
+    @Json(name = "url") val url: String
+)

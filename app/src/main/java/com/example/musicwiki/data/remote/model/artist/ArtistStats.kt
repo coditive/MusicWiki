@@ -1,6 +1,8 @@
 package com.example.musicwiki.data.remote.model.artist
 
-data class ArtistStats (
-    val listeners: Long,
-    val playcount: Long
-    )
+import com.squareup.moshi.Json
+
+data class ArtistStats(
+    @Json(name = "listeners") val listeners: Long,
+    @Json(name = "playcount") val playcount: Long
+)

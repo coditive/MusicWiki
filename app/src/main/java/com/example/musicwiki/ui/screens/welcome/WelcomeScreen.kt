@@ -36,7 +36,7 @@ import timber.log.Timber
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
-    onNavigation: () -> Unit,
+    onNavigation: (String) -> Unit,
 ) {
     val viewModel = hiltViewModel<WelcomeViewModel>()
     val uiState by viewModel.welcomeUIState.collectAsState()
@@ -103,7 +103,7 @@ fun WelcomeScreen(
                         Card(
                             modifier = Modifier.padding(8.dp)
                         ) {
-                            Chip(onClick = { onNavigation.invoke() }) {
+                            Chip(onClick = { onNavigation.invoke(state.data.tagList[item].name) }) {
                                 Text(text = state.data.tagList[item].name)
                             }
                         }

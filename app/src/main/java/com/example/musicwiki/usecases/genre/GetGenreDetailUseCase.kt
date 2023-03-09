@@ -2,7 +2,6 @@ package com.example.musicwiki.usecases.genre
 
 import com.example.musicwiki.BuildConfig
 import com.example.musicwiki.data.remote.ApiService
-import com.example.musicwiki.data.remote.model.tags.Tag
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -14,10 +13,10 @@ class GetGenreDetailUseCase @Inject constructor(
     private val _genreInfoFlow = MutableStateFlow(GenreDetails())
     val genreInfoFlow: StateFlow<GenreDetails> = _genreInfoFlow
 
-    suspend fun execute(tag: Tag) {
+    suspend fun execute(tag: String) {
         try {
-            val response = apiService.getTagInfo(tag.name, BuildConfig.API_KEY)
-            _genreInfoFlow.emit(GenreDetails(response.name, response.wiki.summary, response.wiki.content))
+            val response = apiService.getTagInfo(tag, BuildConfig.API_KEY)
+            _genreInfoFlow.emit(GenreDetails(response.tag.name, response.tag.wiki.summary, response.tag.wiki.content))
         } catch (e: Exception) {
             _genreInfoFlow.emit(GenreDetails(exception = e.localizedMessage))
         }

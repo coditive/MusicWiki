@@ -1,8 +1,8 @@
 package com.example.musicwiki.data.remote
 
 import com.example.musicwiki.data.remote.model.artist.ArtistInfo
-import com.example.musicwiki.data.remote.model.tags.TagInfo
 import com.example.musicwiki.data.remote.response.AlbumInfoResponse
+import com.example.musicwiki.data.remote.response.TagWithWiki
 import com.example.musicwiki.data.remote.response.TopAlbumOfArtist
 import com.example.musicwiki.data.remote.response.TopAlbums
 import com.example.musicwiki.data.remote.response.TopArtists
@@ -25,9 +25,9 @@ interface ApiService {
         @Query("tag") tag: String,
         @Query("api_key") apiKey: String,
         @Query("format") format: String = "json"
-    ): TagInfo
+    ): TagWithWiki
 
-    @GET("2.0/?method=tag.gettopalbums")
+    @GET("2.0/?method=tag.gettopartists")
     suspend fun getArtistListFromTag(
         @Query("tag") tag: String,
         @Query("api_key") apiKey: String,
@@ -41,7 +41,7 @@ interface ApiService {
         @Query("format") format: String = "json"
     ): TopAlbums
 
-    @GET("2.0/?method=tag.gettopalbums")
+    @GET("2.0/?method=tag.gettoptracks")
     suspend fun getTrackListFromTag(
         @Query("tag") tag: String,
         @Query("api_key") apiKey: String,

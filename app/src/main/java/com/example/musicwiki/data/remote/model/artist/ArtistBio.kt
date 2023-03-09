@@ -1,7 +1,9 @@
 package com.example.musicwiki.data.remote.model.artist
 
+import com.squareup.moshi.Json
+
 data class ArtistBio(
-    val published: String,
-    val summary: String,
-    val content: String
+    @Json(name = "published") val published: String,
+    @Json(name = "summary") val summary: String,
+    @Json(name = "content") val content: String
 )

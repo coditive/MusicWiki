@@ -2,7 +2,6 @@ package com.example.musicwiki.ui.screens.genre
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicwiki.data.remote.model.tags.Tag
 import com.example.musicwiki.ui.model.UIState
 import com.example.musicwiki.usecases.genre.GetAlbumListForGenreUseCase
 import com.example.musicwiki.usecases.genre.GetArtistListForGenreUseCase
@@ -61,7 +60,7 @@ class GenreDetailViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.Lazily, UIState.Loading)
 
 
-    fun getGenreDetailsFromTag(tag: Tag) {
+    fun getGenreDetailsFromTag(tag: String) {
         viewModelScope.launch(Dispatchers.IO) {
             getGenreDetailUseCase.execute(tag)
             getArtistListForGenreUseCase.execute(tag)

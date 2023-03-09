@@ -1,9 +1,11 @@
 package com.example.musicwiki.data.remote.model.attr
 
-data class ArtistAttr (
-    val tag: String,
-    val page: Int,
-    val perPage: Int,
-    val totalPages: Int,
-    val total: Int
-    )
+import com.squareup.moshi.Json
+
+data class ArtistAttr(
+    @Json(name = "tag") val tag: String,
+    @Json(name = "page") val page: Int,
+    @Json(name = "perPage") val perPage: Int,
+    @Json(name = "totalPages") val totalPages: Int,
+    @Json(name = "total") val total: Int
+)
