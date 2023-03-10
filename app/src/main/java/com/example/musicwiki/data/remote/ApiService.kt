@@ -51,6 +51,7 @@ interface ApiService {
     @GET("2.0/?method=album.getinfo")
     suspend fun getAlbumInfoByName(
         @Query("album") album: String,
+        @Query("mbid") mbid: String,
         @Query("api_key") apiKey: String,
         @Query("format") format: String = "json"
     ): AlbumInfoResponse

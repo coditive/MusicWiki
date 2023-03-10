@@ -11,8 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.musicwiki.artist.ArtistDetailScreen
 import com.example.musicwiki.ui.screens.album.AlbumDetailScreen
+import com.example.musicwiki.ui.screens.artist.ArtistDetailScreen
 import com.example.musicwiki.ui.screens.genre.GenreDetailScreen
 import com.example.musicwiki.ui.screens.welcome.WelcomeScreen
 import com.example.musicwiki.ui.theme.MusicWikiTheme
@@ -58,17 +58,19 @@ fun NavHostComposable(
         composable("genreDetailScreen/{genreName}") {
             val genreName = it.arguments?.getString("genreName") ?: ""
             GenreDetailScreen(
-                onNavigationToAlbumDetails = { albumName -> navController.navigate("albumDetailScreen/$albumName") },
+                onNavigationToAlbumDetails = { albumName, mbid -> navController.navigate("albumDetailScreen/$albumName/$mbid") },
                 onNavigationToArtistDetails = { artistName -> navController.navigate("artistDetailScreen/$artistName") },
                 genreName = genreName
             )
         }
 
-        composable("albumDetailScreen/{albumName}") {
+        composable("albumDetailScreen/{albumName}/{mbid}") {
             val albumName = it.arguments?.getString("albumName") ?: ""
+            val mbid = it.arguments?.getString("mbid") ?: ""
             AlbumDetailScreen(
                 onNavigationToGenreDetails = { genreName -> navController.navigate("genreDetailScreen/$genreName") },
-                albumName = albumName
+                albumName = albumName,
+                mbid = mbid
             )
         }
 

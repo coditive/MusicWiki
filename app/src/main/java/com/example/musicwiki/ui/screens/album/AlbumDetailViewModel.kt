@@ -2,7 +2,6 @@ package com.example.musicwiki.ui.screens.album
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicwiki.data.remote.model.album.Album
 import com.example.musicwiki.ui.model.UIState
 import com.example.musicwiki.usecases.album.GetAlbumDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,9 +30,9 @@ class AlbumDetailViewModel @Inject constructor(
             }
         }.stateIn(viewModelScope, SharingStarted.Lazily, UIState.Loading)
 
-    fun getAlbumDetails(album: Album) {
+    fun getAlbumDetails(album: String, mbid: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            getAlbumDetailUseCase.execute(album)
+            getAlbumDetailUseCase.execute(album, mbid)
         }
     }
 }

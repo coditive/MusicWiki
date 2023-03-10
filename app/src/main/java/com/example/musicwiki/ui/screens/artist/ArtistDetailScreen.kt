@@ -1,4 +1,4 @@
-package com.example.musicwiki.artist
+package com.example.musicwiki.ui.screens.artist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.musicwiki.R
-import com.example.musicwiki.ui.screens.artist.ArtistDetailViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

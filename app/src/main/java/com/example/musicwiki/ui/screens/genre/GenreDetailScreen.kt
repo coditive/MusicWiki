@@ -44,7 +44,7 @@ import com.example.musicwiki.ui.model.UIState
 @Composable
 fun GenreDetailScreen(
     modifier: Modifier = Modifier,
-    onNavigationToAlbumDetails: (String) -> Unit,
+    onNavigationToAlbumDetails: (String, String) -> Unit,
     onNavigationToArtistDetails: (String) -> Unit,
     genreName: String
 ) {
@@ -136,7 +136,7 @@ fun GenreDetailScreen(
                                     .wrapContentSize()
                                     .clickable {
                                         when (selectedTabIndex.value) {
-                                            0 -> onNavigationToAlbumDetails(state.data.albumList[item].name)
+                                            0 -> onNavigationToAlbumDetails(state.data.albumList[item].name, state.data.albumList[item].mbid!!)
                                             1 -> onNavigationToArtistDetails(state.data.artistList[item].name)
                                         }
                                     }
