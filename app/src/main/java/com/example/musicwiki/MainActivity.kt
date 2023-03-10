@@ -58,21 +58,26 @@ fun NavHostComposable(
         composable("genreDetailScreen/{genreName}") {
             val genreName = it.arguments?.getString("genreName") ?: ""
             GenreDetailScreen(
-                onNavigationToAlbumDetails = { navController.navigate("albumDetailScreen") },
-                onNavigationToArtistDetails = { navController.navigate("artistDetailScreen") },
+                onNavigationToAlbumDetails = { albumName -> navController.navigate("albumDetailScreen/$albumName") },
+                onNavigationToArtistDetails = { artistName -> navController.navigate("artistDetailScreen/$artistName") },
                 genreName = genreName
             )
         }
 
-        composable("albumDetailScreen") {
+        composable("albumDetailScreen/{albumName}") {
+            val albumName = it.arguments?.getString("albumName") ?: ""
             AlbumDetailScreen(
-                onNavigationToAlbumDetails = { navController.navigate("genreDetailScreen") },
+                onNavigationToGenreDetails = { genreName -> navController.navigate("genreDetailScreen/$genreName") },
+                albumName = albumName
             )
         }
 
-        composable("artistDetailScreen") {
+        composable("artistDetailScreen/{artistName}") {
+            val artistName = it.arguments?.getString("artistName") ?: ""
             ArtistDetailScreen(
-                onNavigation = { navController.navigate("albumDetailScreen") },
+                onNavigationToAlbumDetails = { albumName -> navController.navigate("albumDetailScreen/$albumName") },
+                onNavigationToGenreDetails = { genreName -> navController.navigate("genreDetailScreen/$genreName") },
+                artistName = artistName
             )
         }
     }

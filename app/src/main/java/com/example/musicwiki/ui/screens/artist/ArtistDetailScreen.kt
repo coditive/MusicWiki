@@ -28,13 +28,15 @@ import com.example.musicwiki.ui.screens.artist.ArtistDetailViewModel
 @Composable
 fun ArtistDetailScreen(
     modifier: Modifier = Modifier,
-    onNavigation: () -> Unit,
+    onNavigationToGenreDetails: (String) -> Unit,
+    onNavigationToAlbumDetails: (String) -> Unit,
+    artistName: String
 ) {
 
     val viewModel = hiltViewModel<ArtistDetailViewModel>()
 
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (topAppBar, chipRow, albumDescription, artistName, topTracksTitle, topTracksCarousel, topAlbumsTitle, topAlbumsCarousel) = createRefs()
+        val (topAppBar, chipRow, albumDescription, artistNameTextBox, topTracksTitle, topTracksCarousel, topAlbumsTitle, topAlbumsCarousel) = createRefs()
 
         Box(
             modifier = modifier
@@ -69,7 +71,7 @@ fun ArtistDetailScreen(
             )
         }
 
-        Text(text = "ColdPlay", fontSize = 34.sp, modifier = modifier.constrainAs(artistName) {
+        Text(text = "ColdPlay", fontSize = 34.sp, modifier = modifier.constrainAs(artistNameTextBox) {
             bottom.linkTo(topAppBar.bottom, 150.dp)
             start.linkTo(parent.start)
             end.linkTo(parent.end)

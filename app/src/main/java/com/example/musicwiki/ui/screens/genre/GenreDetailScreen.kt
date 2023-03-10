@@ -2,6 +2,7 @@ package com.example.musicwiki.ui.screens.genre
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,8 +44,9 @@ import com.example.musicwiki.ui.model.UIState
 @Composable
 fun GenreDetailScreen(
     modifier: Modifier = Modifier,
-    onNavigationToAlbumDetails: () -> Unit,
-    onNavigationToArtistDetails: () -> Unit, genreName: String
+    onNavigationToAlbumDetails: (String) -> Unit,
+    onNavigationToArtistDetails: (String) -> Unit,
+    genreName: String
 ) {
     val viewModel = hiltViewModel<GenreDetailViewModel>()
     val uiState by viewModel.genreDetailsUIState.collectAsState()
@@ -132,6 +134,12 @@ fun GenreDetailScreen(
                                 modifier = Modifier
                                     .padding(8.dp)
                                     .wrapContentSize()
+                                    .clickable {
+                                        when (selectedTabIndex.value) {
+                                            0 -> onNavigationToAlbumDetails(state.data.albumList[item].name)
+                                            1 -> onNavigationToArtistDetails(state.data.artistList[item].name)
+                                        }
+                                    }
                             ) {
                                 AsyncImage(
                                     model = ImageRequest.Builder(LocalContext.current)

@@ -28,7 +28,8 @@ import com.example.musicwiki.R
 @Composable
 fun AlbumDetailScreen(
     modifier: Modifier = Modifier,
-    onNavigationToAlbumDetails: () -> Unit,
+    onNavigationToGenreDetails: (String) -> Unit,
+    albumName: String
 ) {
 
     val viewModel = hiltViewModel<AlbumDetailViewModel>()
