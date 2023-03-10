@@ -101,12 +101,15 @@ fun GenreDetailScreen(
 
                     val tabList = listOf("Albums", "Artists", "Tracks")
 
-                    val selectedTabIndex by remember {
+                    val selectedTabIndex = remember {
                         mutableStateOf(0)
                     }
-                    TabRow(selectedTabIndex = selectedTabIndex) {
+
+                    TabRow(selectedTabIndex = selectedTabIndex.value) {
                         tabList.forEachIndexed { index, s ->
-                            Tab(selected = selectedTabIndex == index, onClick = { }) {
+                            Tab(selected = selectedTabIndex.value == index, onClick = {
+                                selectedTabIndex.value = index
+                            }) {
                                 Text(
                                     text = s, modifier = modifier.padding(10.dp)
                                 )
@@ -117,7 +120,14 @@ fun GenreDetailScreen(
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2), modifier = Modifier.fillMaxWidth()
                     ) {
-                        items(state.data.albumList.size) { item ->
+                        items(
+                            when (selectedTabIndex.value) {
+                                0 -> state.data.albumList.size
+                                1 -> state.data.artistList.size
+                                2 -> state.data.trackList.size
+                                else -> 0
+                            }
+                        ) { item ->
                             Card(
                                 modifier = Modifier
                                     .padding(8.dp)
@@ -125,11 +135,17 @@ fun GenreDetailScreen(
                             ) {
                                 AsyncImage(
                                     model = ImageRequest.Builder(LocalContext.current)
-                                        .data(state.data.albumList[item].imageList[2].imageUrl)
-                                        .crossfade(true).build(),
+                                        .data(
+                                            when (selectedTabIndex.value) {
+                                                0 -> state.data.albumList[item].imageList[3].imageUrl
+                                                1 -> state.data.artistList[item].imageList[3].imageUrl
+                                                2 -> state.data.trackList[item].imageList[3].imageUrl
+                                                else -> ""
+                                            }
+                                        ).build(),
                                     placeholder = painterResource(R.drawable.ic_launcher_foreground),
                                     contentDescription = null,
-                                    contentScale = ContentScale.Crop,
+                                    contentScale = ContentScale.FillBounds,
                                     modifier = Modifier.clip(CircleShape)
                                 )
 
